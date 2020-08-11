@@ -1,0 +1,9 @@
+- item: "github"
+  url: "https://github.com/dwalleck"
+- item: "twitter"
+  url: "https://twitter.com/darylwalleck"
+- item: "linkedin"
+  url: "https://www.linkedin.com/in/daryl-walleck-2768a23/"
+- item: "rss"
+  url: "index.xml"
+  internal:  true
