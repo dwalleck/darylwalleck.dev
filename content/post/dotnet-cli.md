@@ -4,15 +4,27 @@ title = "Bootstrapping a .NET project from the command line"
 date = "2019-03-10"
 description = "A brief description of Hugo Shortcodes"
 tags = [
-    "shortcodes",
-    "privacy",
+    ".NET",
+    "Command Line",
 ]
-thumbnail = "images/dollar.png"
+thumbnail = "images/dotnet-bot.png"
 
 +++
 
-If you're like me, most of your experience with creating new .NET projects
-involves the "File -> New Project" menu in Visual Studio. After coming back to
+I've been a fan of Visual Studio Code since it was released in 2015 and use it
+for most of my work. I was working with Python most of the time then, where
+creating a new project was as simple as making a new directory
+
+I've spent much of the last few years in the Linux world, where all instructions
+start with "Open a new terminal and then...". It was a major transition for
+someone like me who had used Windows all 
+
+I've spent the last several years of my career in a terminal. Between working
+on Linux and using Python, Terraform, and other command line tools, using GUI
+tools wasn't any option. 
+
+Nearly all of my experience with creating new .NET projects
+involves the "File -> New Project" menu in Visual Studio. When I came back to
 .NET after a few years in the Python world, I was used to doing pretty much
 everything from the command line. Coming back, I was delighted to discover
 the new `dotnet` command and other global tools that made working from the
@@ -81,15 +93,18 @@ dotnet ef database update
 
 ### Scaffolding
 
-I'll be honest: I couldn't write a .NET Core Web API Controller from scratch.
+I'll be honest: I can't write a .NET Core Web API Controller from scratch.
 My muscle memory wants me to right click the Controllers directory so I can
 click the handy `Add -> Controller` link. I had considered writing a VS Code
 snippet to create a skeleton of the class, but I happened upon a
 [workshop](https://github.com/csharpfritz/aspnetcore-app-workshop) that
-introduced me to a helpful tool called `dotnet-aspnet-codegenerator`, which
+introduced me to the `dotnet-aspnet-codegenerator` global tool which
 provides the same capabilities as the
 `API Controller with actions, using Entity Framework` option in the new
 controller wizard.
+
+{{< figure src="/images/AddControllerEntityFramework.png"
+    alt="Picture of the Add Controller dialog from Visual Studio" >}}
 
 This tool has a dependency on another NuGet package to run properly, so the
 first command should be run from the project you are working on.
