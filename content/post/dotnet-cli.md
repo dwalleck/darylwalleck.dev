@@ -11,37 +11,42 @@ thumbnail = "images/dotnet-bot.png"
 
 +++
 
-I've been a fan of Visual Studio Code since it was released in 2015 and use it
-for most of my work. I was working with Python most of the time then, where
-creating a new project was as simple as making a new directory
+From the day Visual Studio Code was released, I've been a huge fan. At that
+time, I mostly worked with Python projects, which played well with the concept
+of a lightweight editor. Running tests or code all happened from the command
+line, which I became used to over the next several years as my projects adopted
+more other command-line based tools like Terraform.
 
-I've spent much of the last few years in the Linux world, where all instructions
-start with "Open a new terminal and then...". It was a major transition for
-someone like me who had used Windows all 
+As .NET Core started to take off, I felt the tug to get back up to speed on all
+things C#. I had grown attached to VS Code over the years, so I challenged
+myself to keep using it rather than switching back to Visual Studio.
+However, all of my previous experience with creating new .NET projects involved
+the "File -> New Project" menu in Visual Studio, so I decided to compromise. I
+used Visual Studio to create solutions, projects, and templated classes like web
+controllers and used VS Code for coding. However, this felt _really wrong_.
 
-I've spent the last several years of my career in a terminal. Between working
-on Linux and using Python, Terraform, and other command line tools, using GUI
-tools wasn't any option. 
+The better answer was the `dotnet` command-line tool, which was added with .NET
+Core. When I started several new personal projects earlier this year, I decided
+to take the time to better understand the `dotnet` tool and see if I could
+overcome the roadblocks that stood between me and command-line bliss.
 
-Nearly all of my experience with creating new .NET projects
-involves the "File -> New Project" menu in Visual Studio. When I came back to
-.NET after a few years in the Python world, I was used to doing pretty much
-everything from the command line. Coming back, I was delighted to discover
-the new `dotnet` command and other global tools that made working from the
-command line a first-class citizen. However, while `dotnet new` does get the
+However, while `dotnet new` does get the
 necessary basic code in place to get started, there's still some things missing
-that Visual Studio took care of for you. Here's a few things I learned to fill
-that gap.
+that Visual Studio took care of for you.
+
+
+With a bit of time,
+useful documentation, and a helpful workshop, I managed to find my way back to
+command line bliss.
 
 ## Solution Management
 
-When creating a project with `dotnet new`, one of the things I noticed off the
-bat missing was a solution file. The assumption likely was that
-anyone creating a project from the command line would likely be working in
-Visual Studio Code and wouldn't need one. Being the fickle person that I am,
-I find myself switching between VS Code and Visual Studio depending on my mood.
-It turns out that this is an easy problem to solve as `dotnet new` has an option
-for solution files.
+When using `dotnet new` to create a new project, one of the first things I
+noticed missing from the project was a solution file. Given that `new` usually
+creates a single project, a solution file isn't necessary. However, if you end
+up creating several projects or are working with someone using Visual Studio,
+having a solution file becomes more useful. It turns out that this is an easy
+problem to solve as `dotnet new` has a command to create solution files.
 
 ```bash
 dotnet new console -n SolutionDemo
