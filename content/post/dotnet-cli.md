@@ -43,10 +43,10 @@ command line bliss.
 
 When using `dotnet new` to create a new project, one of the first things I
 noticed missing from the project was a solution file. Given that `new` usually
-creates a single project, a solution file isn't necessary. However, if you end
-up creating several projects or are working with someone using Visual Studio,
-having a solution file becomes more useful. It turns out that this is an easy
-problem to solve as `dotnet new` has a command to create solution files.
+creates a single project, a solution file isn't always necessary. However,
+if you end up creating several projects or are working with someone using Visual
+Studio, having a solution file becomes more useful. I was pleased to learn that
+`dotnet new` can generate solution files as well.
 
 ```bash
 dotnet new console -n SolutionDemo
@@ -54,23 +54,25 @@ cd SolutionDemo
 dotnet new sln
 ```
 
-Perfect! However, this creates an empty solution file, so there is a bit more
-work to be done. While you could add an entry for your project by hand to the
-solution file, there is also a `dotnet sln` command to allow you to add, list,
-and delete items from the solution.
+Perfect! This creates an empty solution file, so there is a bit more work to be
+done. While you could edit the solution file by hand to add a reference an entry
+for your project by hand to the solution file, there is also a `dotnet sln`
+command to allow you to add, list, and delete items from the solution.
 
+// TODO: Add a list to show it exists
 ```bash
 dotnet sln add .\App1.csproj
 ```
 
 ## Source Control
 
-While adding source control is a quick `git init` away, there's one thing thats
-still missing: a .gitignore file. While you could track down the official GitHub
-repo that has .gitignore files for most language types or just copy one from an
-old project, the .NET team has thankfully added a `dotnet new gitignore` command
-generate the file for you. It's one of those small things that save you a bit
-of time and gives confidence that you have the "right" .gitignore file.
+While adding source control to a project is a quick `git init` away, there's
+another thing that's still missing: a .gitignore file. While you could track
+down the official GitHub repo that has .gitignore files for most language types
+or just copy one from an old project, the .NET team has thankfully added a
+`dotnet new gitignore` command to generate the file for you. It's one of those
+small additions that save a bit of time and doesn't leave you wondering if you
+have the "right" .gitignore file.
 
 ## Global Tools
 
