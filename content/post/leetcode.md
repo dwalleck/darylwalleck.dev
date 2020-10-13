@@ -7,7 +7,7 @@ tags = [
     "Algorithms",
     "Interviews"
 ]
-
+draft = true
 +++
 
 I've had the unfortunate luck to be job hunting twice in the last year. Before
