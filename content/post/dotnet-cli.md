@@ -19,7 +19,7 @@ more other command-line based tools like Terraform.
 
 As .NET Core started to take off, I felt the tug to get back up to speed on all
 things C#. I had grown attached to VS Code over the years, so I challenged
-myself to keep using it rather than switching back to Visual Studio.
+myself to continue using it rather than switching back to Visual Studio.
 However, all of my previous experience with creating new .NET projects involved
 the "File -> New Project" menu in Visual Studio, so I decided to compromise. I
 used Visual Studio to create solutions, projects, and templated classes like API
