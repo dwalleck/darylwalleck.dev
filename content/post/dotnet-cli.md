@@ -1,6 +1,6 @@
 +++
 author = "Daryl Walleck"
-title = "Managing a .NET Core project from the command line"
+title = "Managing a .NET Core Project from the Command Line"
 date = "2020-10-15"
 description = ""
 tags = [
