@@ -1,8 +1,8 @@
 +++
 author = "Daryl Walleck"
-title = "Bootstrapping a .NET project from the command line"
+title = "Managing a .NET Core project from the command line"
 date = "2020-10-12"
-description = "A brief description of Hugo Shortcodes"
+description = ""
 tags = [
     ".NET",
     "Command Line",
@@ -25,10 +25,16 @@ the "File -> New Project" menu in Visual Studio, so I decided to compromise. I
 used Visual Studio to create solutions, projects, and templated classes like API
 controllers and used VS Code for coding. However, this felt _very wrong_.
 
-The better answer was the `dotnet` command-line tool, which was added with .NET
-Core. When I started several new personal projects earlier this year, I decided
-to take the time to better understand the `dotnet` command line experience and
+When I started several new personal projects earlier this year, I decided
+to take the time to better understand the .NET command line experience and
 find alternative ways to handle tasks that I depended on Visual Studio for.
+During that time, I found alternatives to most of the functionality that I
+depended on Visual Studio to provide. I realized that the `dotnet` command was
+more useful for more than just `dotnet new`. I also that where the capabilities
+of the `dotnet` command ended, an ecosystem of command-line applications (an unofficial
+list of tools can be found [here](https://github.com/natemcmaster/dotnet-tools)) created
+to support developing .NET Core applications. I wanted to share some of the
+solutions I found that made working solely from the command line possible.
 
 ## Solution Management
 
@@ -74,14 +80,6 @@ or just copy one from an old project, the .NET team has thankfully added a
 nice additions that save time and doesn't leave you wondering if you found the
 "right" .gitignore file.
 
-## Global Tools
-
-Where the scope `dotnet` command ends, the ecosystem of .NET Core tools step in
-to fill the gaps. If this is the first time you've heard of .NET Core tools,
-they are extensions to the .NET CLI that add new command line programs that
-solve problems related to developing .NET Core applications (an unofficial
-list of tools can be found [here](https://github.com/natemcmaster/dotnet-tools)).
-
 ## Package Management
 
 Replicating Visual Studio's NuGet package manager experience turned out to be
@@ -93,7 +91,7 @@ of research lead me to the NuKeeper global tool which provided exactly what I
 needed.
 
 ```powershell
-nukeeper inspect
+❯ nukeeper inspect
 Found 5 packages
 Found 5 packages in use, 5 distinct, in 1 projects.
 Json.Net, Microsoft.EntityFrameworkCore.Design, Microsoft.EntityFrameworkCore.SqlServer, Microsoft.VisualStudio.Web.CodeGeneration.Design, Swashbuckle.AspNetCore
@@ -113,20 +111,17 @@ downloads the new package versions.
 
 ## Database Migrations
 
-This was the easiest t
-
-There are two tools that I found to be especially useful to replicate
-functionality that I was used to in Visual Studio. If you've worked with Entity
-Framework before, you're likely used to switching to the package manager console
-to run add or run migrations. For the command line world, there is thankfully a
-`dotnet ef` tool that provides the same functionality.
+If you've worked with Entity Framework before, you're likely used to switching
+to the package manager console in Visual Studio to add or run migrations.
+The `dotnet ef` global tool provides the same functionality with similar command
+syntax.
 
 ```powershell
-dotnet ef migrations add FirstMigration
+dotnet ef migrations add InitialDb
 dotnet ef database update
 ```
 
-### Scaffolding
+### Controller Scaffolding
 
 I'll be honest: I can't write a .NET Core Web API Controller from scratch.
 My muscle memory expects right clicking the Controllers directory to pop up the
@@ -137,17 +132,19 @@ handy `Add -> Controller` link that Visual Studio provides.
 
 By coincidence, I happened upon a [workshop](https://github.com/csharpfritz/aspnetcore-app-workshop)
 that introduced me to the `dotnet-aspnet-codegenerator` global tool which
-provides the same capabilitiy. This tool has a dependency on another NuGet
-package to run properly, so the first command should be run from the directory
-of the project you are working on.
-
-dotnet aspnet-codegenerator controller -api -name ToolsController -m Tool -dc Data.AppDbContext -outDir Controllers
-
+provides the same capabilitiy. This tool has a dependencies on other NuGet
+packages, so the package references should be added to a project you are
+working on.
 
 ```powershell
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
+
+This tool assumes that your web project is following the .NET convention of
+storing model classes in a directory named `Models`. 
 
 ```powershell
 ❯ dotnet aspnet-codegenerator controller -api -name ToolsController -m Tool -dc Data.AppDbContext -outDir Controllers
