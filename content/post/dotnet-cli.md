@@ -132,8 +132,8 @@ handy `Add -> Controller` link that Visual Studio provides.
 
 By coincidence, I happened upon a [workshop](https://github.com/csharpfritz/aspnetcore-app-workshop)
 that introduced me to the `dotnet-aspnet-codegenerator` global tool which
-provides the same capabilitiy. This tool has a dependencies on other NuGet
-packages, so the package references should be added to a project you are
+provides the same capabilitiy. This tool has dependencies on other NuGet
+packages, so the package references should be added to the project you are
 working on.
 
 ```powershell
@@ -143,8 +143,12 @@ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
-This tool assumes that your web project is following the .NET convention of
-storing model classes in a directory named `Models`. 
+This tool assumes that your web project follows the convention of storing data
+models in a `Models` directory. You also need to provide the name of the new
+controller, the path to your Controllers directory, and the namespace of your
+data context. Don't worry if you don't have a data context at this point. If the
+generator determines that the data context doesn't exist, it will create it for
+you.
 
 ```powershell
 ❯ dotnet aspnet-codegenerator controller -api -name ToolsController -m Tool -dc Data.AppDbContext -outDir Controllers
@@ -159,6 +163,20 @@ Added Controller : '\Controllers\ToolsController.cs'.
 RunTime 00:00:07.58
 ```
 
-There's a lot to unpack here. First, it notes that this project does not have
-a `DbContext` class yet, so it uses the provided name to create it. Next, it
-inspects the `Tool` class to
+There's a lot to unpack here. It creates a new DbContext, wires up the new
+DbContext in Startup.cs, and finally creates the new API controller with the
+standard create/read/update/delete routes. This approach may not always meet
+your needs, it is a great way to get quick prototypes up and running.
+
+## Wrap Up
+
+.NET has come a long way from being tied to Visual Studio. Having command line
+options for functionality allows developers who prefer using the command line to
+to have an experience equal to those working in Visual Studio. To keep this post
+from going on for pages I only mentioned a few of the global tools that I've
+integrated into my workflow, but there is a growing ecosystem of tools to handle
+issues like code formatting, code coverage, or finding just the right gif. Go
+give them a try!
+
+{{< figure src="/images/janet_waving.gif"
+    alt="Good Place Janet waving" class="display: block, margin: 1.0rem auto, max-width: 100%, height: auto" >}}
