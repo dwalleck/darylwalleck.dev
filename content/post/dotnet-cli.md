@@ -1,7 +1,7 @@
 +++
 author = "Daryl Walleck"
 title = "Managing a .NET Core project from the command line"
-date = "2020-10-12"
+date = "2020-10-15"
 description = ""
 tags = [
     ".NET",
@@ -124,7 +124,7 @@ dotnet ef database update
 ### Controller Scaffolding
 
 I'll be honest: I can't write a .NET Core Web API Controller from scratch.
-My muscle memory expects right clicking the Controllers directory to pop up the
+My muscle memory expects right-clicking the Controllers directory to pop up the
 handy `Add -> Controller` link that Visual Studio provides.
 
 {{< figure src="/images/AddControllerEntityFramework.png"
@@ -136,6 +136,9 @@ provides the same capabilitiy. This tool has dependencies on other NuGet
 packages, so the package references should be added to the project you are
 working on.
 
+While searching for a solution, the host of a live coding stream mentioned a
+[workshop](https://github.com/csharpfritz/aspnetcore-app-workshop) that introduced me to the `dotnet-aspnet-codegenerator` global tool, which provides the same capabilities for generating controllers. This tool has dependencies on other NuGet packages, so the package references should be added to the project you are working on.
+
 ```powershell
 dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
@@ -143,12 +146,7 @@ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
-This tool assumes that your web project follows the convention of storing data
-models in a `Models` directory. You also need to provide the name of the new
-controller, the path to your Controllers directory, and the namespace of your
-data context. Don't worry if you don't have a data context at this point. If the
-generator determines that the data context doesn't exist, it will create it for
-you.
+This tool assumes that your web project follows the convention of storing data models in a `Models` directory. You also need to provide the new controller's name, the path to your Controllers directory, and the namespace of your DbContext. Don't worry if you don't haven't created a DbContext at this point. If the generator determines that the DbContext doesn't exist, the tool will create one for you.
 
 ```powershell
 ❯ dotnet aspnet-codegenerator controller -api -name ToolsController -m Tool -dc Data.AppDbContext -outDir Controllers
@@ -163,20 +161,14 @@ Added Controller : '\Controllers\ToolsController.cs'.
 RunTime 00:00:07.58
 ```
 
-There's a lot to unpack here. It creates a new DbContext, wires up the new
+There's a lot to unpack here. The tool creates a new DbContext, wires up the new
 DbContext in Startup.cs, and finally creates the new API controller with the
 standard create/read/update/delete routes. This approach may not always meet
 your needs, it is a great way to get quick prototypes up and running.
 
 ## Wrap Up
 
-.NET has come a long way from being tied to Visual Studio. Having command line
-options for functionality allows developers who prefer using the command line to
-to have an experience equal to those working in Visual Studio. To keep this post
-from going on for pages I only mentioned a few of the global tools that I've
-integrated into my workflow, but there is a growing ecosystem of tools to handle
-issues like code formatting, code coverage, or finding just the right gif. Go
-give them a try!
+.NET has come a long way from being tightly coupled with Visual Studio. Having the command line as an alternative workflow allows those developers to have an experience equal to those working in Visual Studio. To keep this post concise, I only mentioned a few of the global tools I've integrated into my workflow. Still, there is a growing ecosystem of tools to handle everything from code formatting, measuring code coverage, or finding just the right gif. Go give them a try!
 
 {{< figure src="/images/janet_waving.gif"
     alt="Good Place Janet waving" class="display: block, margin: 1.0rem auto, max-width: 100%, height: auto" >}}
