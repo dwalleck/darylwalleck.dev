@@ -9,6 +9,7 @@ tags = [
     "Jest"
 ]
 codeMaxLines = 50
+draft = true
 +++
 
 In the Playwright 1.12 release, one of the new features added was the ability to
